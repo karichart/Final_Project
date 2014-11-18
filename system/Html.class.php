@@ -10,6 +10,11 @@ class Html{
 	
 	
 	function display(){
+			
+		$message = (isset($_SESSION['message']) && !empty($_SESSION['message']) ? $_SESSION['message'] : '');
+			
+		$_SESSION['message'] = '';
+		
 		$content = '
 			<!DOCTYPE html>
 				<html>
@@ -22,6 +27,7 @@ class Html{
 			            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
             			<title>'. $this->title .'</title>
 						<link rel="stylesheet" href="/css/main.css" />
+						<script type="text/javascript" src="/js/main.js"></script>
 						
             		<body>
             		
@@ -30,6 +36,7 @@ class Html{
 		            		  	<div id="bs-example-navbar-collapse-1">
 		            		  	
 			            		  <ul class="navbar-nav container">
+			            		  	<li id="cart"><a href="/store?action=view-cart">Cart</a></li>
 			            		  	<li id="logo"><a href="/"><img src="/media/logo.png" alt="Utep Department of computer science logo" /></a></li>
 								    
 								    '. (isset($_SESSION['user']) && !empty($_SESSION['user']) ? 
@@ -39,11 +46,11 @@ class Html{
 									<li><a href="/store.php">Store</a></li>
 									<li><a href="/about-us.php">About</a></li>
 									<li><a href="/">Home</a></li>
-								  </ul>
+								</ul>
 							  </div>
 							</nav>
 						</div><div class="clearfix"></div>
-						'. $this->content .'
+						'. $message . $this->content .'
            		</body>
            		</html>';
 		

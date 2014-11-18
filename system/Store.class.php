@@ -118,11 +118,13 @@ class Store {
 				rename($image['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $image_path);
 				chmod($_SERVER['DOCUMENT_ROOT'] . $image_path, 0777);
 				
-				$query = MYSQL::query('UPDATE items SET image = "'. $image_path .'" WHERE ITEM_ID = ' . $item_id);
+				$image = MYSQL::query('UPDATE items SET image = "'. $image_path .'" WHERE ITEM_ID = ' . $item_id);
 						
 			}
 		
 		}
+		
+		return $query;
 	
 	}
 	
@@ -134,20 +136,21 @@ class Store {
 				chmod($_SERVER['DOCUMENT_ROOT'] . $image_path, 0777);
 		}	
 		
-		$query = MYSQL::query('UPDATE items set 
+		$query ='UPDATE items set 
 					name = "'. $name .'", 
 					description = "'. $description .'",
 					quantity= "'. $quantity .'",
-					price= "'. $price .'",
-					' . (!empty($image) ? 'image="'. $image_path .'"' : '') .
-					'WHERE ITEM_ID = ' . $item_id);
+					price= "'. $price .'"
+					' . (!empty($image) ? ',image="'. $image_path .'"' : '') .
+					'WHERE ITEM_ID = "' . $item_id . '"';
+					
+		return  MYSQL::query($query);
 		
 	}
 	
 	static function frontEndListing(){
 		$query = MYSQL::query('SELECT * FROM items');
 		$content = '';
-		
 		while($item = $query->fetch_assoc()){
 			$image = (empty($item['image']) ? '/media/photo_not_available.png' :  $item['image']) ;			
 			$content .= '<div class="col-4 gray-background">
@@ -157,12 +160,32 @@ class Store {
 							<h3>'. $item['name'] .'</h3>
 							<p>Price: $'. $item['price'] .'</p>
 							<p>Description: '. $item['description'] .'</p>
-							<a href="#">Add To Cart</a>
+							<a href="#" id="'. $item['ITEM_ID'] .'" name="add-item-link">Add To Cart</a>
 						</div>';		
 		}
 					
 		return $content;
 			
 		
+	}
+	
+	static function showCart(){
+		$content = '<h1>Your Cart</h1>
+					<table>
+					<tr><th></th><th>Item</th><th>Description</th><th>Price</th><th>Quantity</th><th></th></tr>';
+		foreach($_SESSION['cart'] as $key => $value){
+			$query = MYSQL::query('SELECT * FROM items WHERE ITEM_ID = ' . $key)->fetch_assoc();
+			$content .= '<tr><td><img src="'. $query['image'] .'" alt="'. $query['name'] .'"></td>
+							  <td>'. $query['name']  .'</td>
+							  <td>'. $query['description']  .'</td>
+							  <td>' . $query['price'] . '</td>
+							  <td>'. $value .'</td>
+							  <td><a href="/store?action=remove-item&id='. $query['ITEM_ID'] .'"  class="remove-item">Remove Item</a></td></tr>';
+		}
+		
+		$content .= '</table>
+					<a href="#" >Checkout</a>';
+		
+		return $content;
 	}
 }

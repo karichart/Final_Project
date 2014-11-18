@@ -8,6 +8,9 @@ require_once(ROOT . '/system/MYSQL.class.php');
 require_once(ROOT . '/system/Form.class.php');	
 require_once(ROOT . '/system/Users.class.php');	
 require_once(ROOT . '/system/Store.class.php');	
+require_once(ROOT . '/system/System.class.php');	
 
 session_start();
+
+
 ?>
