@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: helvetica; }
+  body input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 22px; }
+    body input.btn-primary {
+      height: 32px;
+      background: #002147;
+      padding: 1%;
+      color: white; }
+  body #register {
+    color: black;
+    text-decoration: none; }
+  body #menu {
+    overflow: hidden;
+    background: #002147;
+    padding: 10px; }
+    body #menu .navbar-nav {
+      list-style: none; }
+      body #menu .navbar-nav li {
+        float: right;
+        margin-right: 20px; }
+        body #menu .navbar-nav li a {
+          color: white;
+          text-decoration: none; }
+        body #menu .navbar-nav li#logo {
+          margin-top: -12px;
+          float: left; }
+    body #menu .uppercase {
+      text-transform: uppercase; }
+  body .container {
+    padding: 0 10% 0 10%; }
+  body #home-banner {
+    width: 100%;
+    height: 350px;
+    background-image: url("/media/utep.jpg");
+    overflow: hidden;
+    background-size: 100%;
+    background-position: 40%; }
+  body #welcome-message {
+    color: white;
+    font-size: 5em;
+    text-shadow: 2.5px 2.5px 2.5px #2a2a2a; }
+  body .centered-form {
+    padding: 50px;
+    width: 70%;
+    margin: 50px auto 50px auto;
+    text-align: center; }
+  body .gray-background {
+    background: #f2f2f2; }
+  body .round-box {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 20px; }
+  body #hello-message {
+    position: absolute;
+    right: 0;
+    margin-top: 15px;
+    margin-right: 135px; }
+  body .col-4 {
+    width: 33.33333333333333%;
+    display: inline-block;
+    overflow: hidden; }
+  body .img-width {
+    width: 100%; }
+  body .item-img {
+    height: 17em; }
