@@ -6,6 +6,7 @@
 	if(isset($_GET['action'])) {
 		
 		if($_GET['action'] === 'out') {
+			Friends::cleanAcceptedRequests();
 			session_start();
 			$_SESSION = array();
 			setcookie(session_name(), '', time()-2592000, '/');
@@ -23,7 +24,7 @@
 				exit();
 			}else{
 				
-				if($_SESSION['user']['role'] === 'student'){
+				if($_SESSION['user']['role'] === '0'){
 					header('location: my-info.php');
 					exit();
 				}else{
