@@ -107,5 +107,52 @@ body{
   height: 17em;
   
 }
+
+#cart{
+  position: absolute;
+  right: 0;
+  margin-right: 89px;
+  top: 0;
+  margin-top: 7px;
+  
+  a{
+    
+    img{
+      width: 86%;
+    }
+   
+   #number-of-items-in-cart{
+     &:hover{
+        display: inline-block;
+          color: black;
+        background: yellow;
+     }
+      display: none;
+    
+    }
+  }
+  
+}
+
+
+#admin-menu{
+  overflow: hidden;
+
+  ul{
+      list-style: none;
+      float: right;
+      
+      li{
+        display: inline;
+        margin-left: 10px;
+        a{
+          color: black;
+          text-decoration: none;
+        }
+      }
+  }
+}
+
+
 }
 

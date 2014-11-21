@@ -15,7 +15,7 @@ class Html{
 			
 		$_SESSION['message'] = '';
 		
-		$content = '
+		$html = '
 			<!DOCTYPE html>
 				<html>
 					<head>
@@ -28,15 +28,22 @@ class Html{
             			<title>'. $this->title .'</title>
 						<link rel="stylesheet" href="/css/main.css" />
 						<script type="text/javascript" src="/js/main.js"></script>
+						<script src="https://www.paypalobjects.com/js/external/apdg.js" type="text/javascript"></script>
+						
 						
             		<body>
             		
             			<div id="menu" >
-		            		<nav class="navbar navbar-default" role="navigation">
-		            		  	<div id="bs-example-navbar-collapse-1">
-		            		  	
+		            		<nav role="navigation">		            		  	
 			            		  <ul class="navbar-nav container">
-			            		  	<li id="cart"><a href="/store?action=view-cart">Cart</a></li>
+			            		  	<li id="cart">
+			            		  		<a href="/store?action=view-cart">
+			            		  			<img src="/media/shopping-cart.png" alt="shopping cart" />
+			            		  			<span id="number-of-items-in-cart">
+			            		  				You have '. (isset ($_SESSION['cart']) ? count($_SESSION['cart']) : '') .' items in your cart
+			            		  			</span>
+			            		  		</a>
+			            		  	</li>
 			            		  	<li id="logo"><a href="/"><img src="/media/logo.png" alt="Utep Department of computer science logo" /></a></li>
 								    
 								    '. (isset($_SESSION['user']) && !empty($_SESSION['user']) ? 
@@ -47,14 +54,35 @@ class Html{
 									<li><a href="/about-us.php">About</a></li>
 									<li><a href="/">Home</a></li>
 								</ul>
-							  </div>
 							</nav>
-						</div><div class="clearfix"></div>
-						'. $message . $this->content .'
+						</div><div class="clearfix"></div>';
+			if(isset($_SESSION['user']) && !empty($_SESSION['user']['username'])){
+				$html .= '<div id="admin-menu">
+								<ul class="navbar-nav container">
+								<li><a href="#">My Profile</a><li>
+								<li><a href="#">Messages</a><li>
+								<li><a href="#">Friend Requests</a><li>
+								
+								';
+				if( $_SESSION['user']['role'] == 1){
+						$html .=	'
+									<li><a href="/admin/manage-store.php">Manage Store</a></li>
+									
+									<li><a href="#">Users</a><li>									
+								
+							';
+					}
+					
+					$html .= ' 
+								</ul></div><div class="clearfix"></div>';
+				
+				
+			}
+				$html .=  $message . $this->content .'
            		</body>
            		</html>';
 		
-		echo $content;
+		echo $html;
 	}
 	
 	function set_title($title){

@@ -7,8 +7,11 @@ if ($_GET['action'] === 'add-to-cart') {
 		$content = $_GET['id'];
 		
 	}else{
-		@$_SESSION['cart'][$_GET['id']]++;
+		 @$_SESSION['cart'][$_GET['id']]++;
+		
+		
 		$content = count($_SESSION['cart']);
+		
 	}
 	
 	

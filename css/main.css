@@ -66,3 +66,28 @@ body {
     overflow: hidden; }
   body .item-img {
     height: 17em; }
+  body #cart {
+    position: absolute;
+    right: 0;
+    margin-right: 89px;
+    top: 0;
+    margin-top: 7px; }
+    body #cart a img {
+      width: 86%; }
+    body #cart a #number-of-items-in-cart {
+      display: none; }
+      body #cart a #number-of-items-in-cart:hover {
+        display: inline-block;
+        color: black;
+        background: yellow; }
+  body #admin-menu {
+    overflow: hidden; }
+    body #admin-menu ul {
+      list-style: none;
+      float: right; }
+      body #admin-menu ul li {
+        display: inline;
+        margin-left: 10px; }
+        body #admin-menu ul li a {
+          color: black;
+          text-decoration: none; }

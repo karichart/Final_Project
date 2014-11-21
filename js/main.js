@@ -10,9 +10,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			addToCart(item_ids[i]);
 	}
 	
-	
-	
-	
 });
 	
 
@@ -48,8 +45,8 @@ function ajaxFunction(item_id) {
 	// Create a function that will receive data sent from the server
 	ajaxRequest.onreadystatechange = function() {
 		if (ajaxRequest.readyState == 4) {	
-			var cart = document.getElementById('cart');
-			 cart.innerHTML = cart.innerHTML + ajaxRequest.responseText;
+			var cart = document.getElementById('number-of-items-in-cart');
+			// cart.innerHTML = 'You have' + ajaxRequest.responseText + ' items in your cart';
 		}
 	}
 	
