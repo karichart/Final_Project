@@ -16,16 +16,15 @@
 		}
 	}else if(isset($_POST['username'])) {
 		
-			$secure = (isset($_POST['allow_injection'])  ? false : true);
 			
-			if(!Users::authentication($_POST['username'], $_POST['password'], $secure)){
+			if(!Users::authentication($_POST['username'], $_POST['password'], true)){
 				$_SESSION['message'] = 'Invalid username password';
 				header('location: /login.php');
 				exit();
 			}else{
 				
 				if($_SESSION['user']['role'] === '0'){
-					header('location: my-info.php');
+					header('location: dashboard.php');
 					exit();
 				}else{
 					header('location: /admin/manage-store.php');

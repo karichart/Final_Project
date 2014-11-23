@@ -12,6 +12,7 @@ require_once(ROOT . '/system/System.class.php');
 require_once(ROOT . '/system/Graduates.class.php');
 require_once(ROOT . '/system/Friends.class.php');	
 require_once(ROOT . '/system/Dashboard.class.php');	
+require_once(ROOT . '/system/Messages.class.php');	
 
 
 session_start();
