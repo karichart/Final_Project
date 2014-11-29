@@ -176,7 +176,6 @@ class Store {
 			$content .= '<table>
 					<tr><th></th><th>Item</th><th>Description</th><th>Price</th><th>Quantity</th><th></th></tr>';
 
-			var_dump($_SESSION['cart']);
 			foreach ($_SESSION['cart'] as $key => $value) {
 				$query = MYSQL::query('SELECT * FROM items WHERE ITEM_ID = ' . $key . ' AND quantity > 0') -> fetch_assoc();
 				$content .= '<tr><td><img src="' . $query['image'] . '" alt="' . $query['name'] . '"></td>
@@ -189,19 +188,46 @@ class Store {
 							  </td></tr>';
 			}
 
-			$content .= '</table>
-					<a href="#" >Checkout</a>';
+			$content .= '</table>';
 		}
 
+		/*
 		$content .= '<form target="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" >
 					<input type="hidden" name="cmd" value="_s-xclick">
-						<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
-">
+					<input type="hidden" name="item_name_1" value="Item Name 1">
+					 <input type="hidden" name="amount_1" value="1.00">
+					 <input type="hidden" name="item_name_2" value="Item Name 2">
+					 <input type="hidden" name="amount_2" value="2.00">
+					<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
 					<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 					<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
 	</form>
 		
-					';
+					';*/
+					
+		$content .= '
+			<form target="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" >
+			 <input type="hidden" name="cmd" value="_cart">  <!-- change _xclick to _cart -->
+    <input type="hidden" name="upload" value="1">  <!-- add this line in your code -->
+    <input type="hidden" name="business" value="karen-facilitator@phidevinc.com">';
+   
+   
+   $i = 1;
+   foreach($_SESSION['cart'] as $key => $value){
+   		$query = MYSQL::query('SELECT * FROM items WHERE ITEM_ID = ' . $key)->fetch_assoc();
+   		$content .= '<input type="hidden" name="item_name_'. $i .'" value="'.  $query['name'] .'">
+    				<input type="hidden" name="amount_'. $i .'" value="'. $query['price'] .'">
+    				<input type="hidden" name="quantity_'. $i .'" value="'. $value .'">
+    				';
+    	$i++;
+   }
+   
+   // <input type="hidden" name="item_name_1" value="Item Name 1">
+    //<input type="hidden" name="amount_1" value="1.00">
+    		
+    $content .=	'<input type="submit" value="PayPal">
+           <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>';
 
 		return $content;
 	}

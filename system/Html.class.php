@@ -27,6 +27,7 @@ class Html{
 			            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
             			<title>'. $this->title .'</title>
 						<link rel="stylesheet" href="/css/main.css" />
+						<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 						<script type="text/javascript" src="/js/main.js"></script>
 						<script src="https://www.paypalobjects.com/js/external/apdg.js" type="text/javascript"></script>
 						
